@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/grid_view_screen.dart';
-import 'package:flutter_application_1/task_tracker_screen.dart';
+import 'package:flutter_application_1/counter_app_cubit/counter_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'apple_task_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,17 +13,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return BlocProvider(
+      create: (context) => CounterCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const MyHomePage(),
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
-  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -30,18 +34,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GridViewScreen(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const TaskTrackerScreen(),
-            ),
-          );
-        },
-      ),
-    );
+    return Scaffold(body: AppleTaskScreen());
   }
 }
