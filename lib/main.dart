@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/counter_app_cubit/counter_cubit.dart';
+import 'package:flutter_application_1/grid_view_screen.dart';
+import 'package:flutter_application_1/todo_task_cubit/todo_cubit.dart';
+import 'package:flutter_application_1/todo_task_cubit/todo_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'apple_task_screen.dart';
@@ -14,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CounterCubit(),
+      create: (context) => TodoCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: const MyHomePage(),
@@ -34,6 +37,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: AppleTaskScreen());
+    return Scaffold(body: TodoScreen());
   }
 }

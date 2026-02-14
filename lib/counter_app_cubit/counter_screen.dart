@@ -9,26 +9,32 @@ class CounterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Counter App")),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("Counter is:"),
-          BlocBuilder<CounterCubit, int>(
-            builder: (context, state) {
-              return Text(state.toString(), style: TextStyle(fontSize: 20),);
-            },
-          ),
-          ElevatedButton(child: Text("Increment"), onPressed: (){
-            BlocProvider.of<CounterCubit>(context).increment();
-          },),
-          ElevatedButton(child: Text("Decrement"), onPressed: (){
-            BlocProvider.of<CounterCubit>(context).decrement();
-          },),
-          ElevatedButton(child: Text("Reset"), onPressed: (){
-            BlocProvider.of<CounterCubit>(context).reset();
-          },),
-
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("Counter is:"),
+            BlocBuilder<CounterCubit, int>(
+              builder: (context, state) {
+                return Text(state.toString(), style: TextStyle(fontSize: 20),);
+              },
+            ),
+            SizedBox(height: 8,),
+            ElevatedButton(child: Text("Increment"), onPressed: (){
+              BlocProvider.of<CounterCubit>(context).increment();
+            },),
+            SizedBox(height: 8,),
+            ElevatedButton(child: Text("Decrement"), onPressed: (){
+              BlocProvider.of<CounterCubit>(context).decrement();
+            },),
+            SizedBox(height: 8,),
+            ElevatedButton(child: Text("Reset"), onPressed: (){
+              BlocProvider.of<CounterCubit>(context).reset();
+            },),
+        
+          ],
+        ),
       ),
     );
   }
