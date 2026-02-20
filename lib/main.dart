@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/cart_provider_task/cart_cubit.dart';
 import 'package:flutter_application_1/cart_provider_task/cart_provider.dart';
 import 'package:flutter_application_1/cart_provider_task/cart_screen.dart';
 import 'package:flutter_application_1/counter_app_cubit/counter_cubit.dart';
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         BlocProvider(create: (context) => TodoCubit()),
+        BlocProvider(create: (context) => CartShopCubit()),
+        BlocProvider(create: (context) => CartFavoriteCubit()),
         ChangeNotifierProvider(create: (context) => CartProvider())
       ],
       child: MaterialApp(
