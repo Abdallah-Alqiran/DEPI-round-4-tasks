@@ -6,6 +6,7 @@ import 'package:flutter_application_1/counter_app_cubit/counter_cubit.dart';
 import 'package:flutter_application_1/expense_tracker_app/data/sharedpreference_manager.dart';
 import 'package:flutter_application_1/expense_tracker_app/ui/expense_home_screen.dart';
 import 'package:flutter_application_1/grid_view_screen.dart';
+import 'package:flutter_application_1/navigation_task/navigation_main_screen.dart';
 import 'package:flutter_application_1/todo_task_cubit/todo_cubit.dart';
 import 'package:flutter_application_1/todo_task_cubit/todo_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,6 +52,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: CartScreen());
+    return NavigationMainScreen();
   }
 }

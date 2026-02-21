@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/cart_provider_task/cart_cubit.dart';
 import 'package:flutter_application_1/cart_provider_task/cart_favorite_screen.dart';
 import 'package:flutter_application_1/cart_provider_task/cart_model.dart';
-import 'package:flutter_application_1/cart_provider_task/cart_provider.dart';
 import 'package:flutter_application_1/cart_provider_task/cart_shop_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
