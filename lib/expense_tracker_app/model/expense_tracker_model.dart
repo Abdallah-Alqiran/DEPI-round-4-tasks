@@ -12,7 +12,7 @@ class ExpenseTrackerModel {
   });
 
   factory ExpenseTrackerModel.fromJson(Map<String, dynamic> json) {
-    return ExpenseTrackerModel(name: json['name'],amount: json['amount'], date: json['date']);
+    return ExpenseTrackerModel(id: json['id'], name: json['name'],amount: json['amount'], date: json['date']);
   }
 
   Map<String, dynamic> toJson() => {

@@ -1,10 +1,12 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/expense_tracker_app/data/expense_local_data.dart';
+import 'package:flutter_application_1/expense_tracker_app/data/http_handler.dart';
+// import 'package:flutter_application_1/expense_tracker_app/data/expense_local_data.dart';
 import 'package:flutter_application_1/expense_tracker_app/model/expense_tracker_model.dart';
 
 class AddExpenseScreen extends StatefulWidget {
-  const AddExpenseScreen({super.key});
+  final ExpenseTrackerModel? expense;
+  final bool isUpdate;
+  const AddExpenseScreen({super.key, this.expense, this.isUpdate = false});
 
   @override
   State<AddExpenseScreen> createState() => _AddExpenseScreenState();
@@ -31,7 +33,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                 children: [
                   TextFormField(
                     controller: descriptionController,
-                    decoration: InputDecoration(label: Text("Enter Expense...")),
+                    decoration: InputDecoration(
+                      label: Text("Enter Expense..."),
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please enter...";
@@ -39,7 +43,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       return null;
                     },
                   ),
-        
+
                   TextFormField(
                     controller: amountController,
                     decoration: InputDecoration(label: Text("Enter Amount")),
@@ -67,8 +71,22 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             ElevatedButton(
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
-                  final expense = ExpenseTrackerModel(name: descriptionController.text, amount: amountController.text, date: dateController.text);
-                  await ExpenseLocalData.addExpense(expense);
+                  if (widget.isUpdate) {
+                    final expense = ExpenseTrackerModel(
+                      name: descriptionController.text,
+                      amount: amountController.text,
+                      date: dateController.text,
+                    );
+                    await HttpHandler.updateExpense(expense.id ?? '', expense);
+                  } else {
+                    final expense = ExpenseTrackerModel(
+                      name: descriptionController.text,
+                      amount: amountController.text,
+                      date: dateController.text,
+                    );
+                    await HttpHandler.addExpense(expense);
+                    // await ExpenseLocalData.addExpense(expense);
+                  }
                 }
                 Navigator.pop(context);
               },

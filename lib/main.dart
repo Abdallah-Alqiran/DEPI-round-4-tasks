@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/animation_task/animated_card_extend_screen.dart' show AnimatedCardExtendScreen;
+import 'package:flutter_application_1/animation_task/animated_container_screen.dart';
+import 'package:flutter_application_1/animation_task/drawing_animation_screen.dart';
 import 'package:flutter_application_1/cart_provider_task/cart_cubit.dart';
 import 'package:flutter_application_1/cart_provider_task/cart_provider.dart';
 import 'package:flutter_application_1/cart_provider_task/cart_screen.dart';
@@ -36,22 +39,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const MyHomePage(),
+        home: const DrawingAnimationScreen(),
       ),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return NavigationMainScreen();
   }
 }

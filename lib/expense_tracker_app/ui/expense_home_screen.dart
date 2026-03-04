@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/expense_tracker_app/data/expense_local_data.dart';
+import 'package:flutter_application_1/expense_tracker_app/data/http_handler.dart';
+// import 'package:flutter_application_1/expense_tracker_app/data/expense_local_data.dart';
 import 'package:flutter_application_1/expense_tracker_app/model/expense_tracker_model.dart';
 import 'package:flutter_application_1/expense_tracker_app/ui/add_expense_screen.dart';
 
@@ -20,7 +21,8 @@ class _ExpenseHomeScreenState extends State<ExpenseHomeScreen> {
   }
 
   void loadExpenses() async {
-    allExpenses = await ExpenseLocalData.getAllExpensesData();
+    // allExpenses = await ExpenseLocalData.getAllExpensesData();
+    allExpenses = await HttpHandler.getAllExpenses();
     setState(() {});
   }
 
@@ -35,9 +37,28 @@ class _ExpenseHomeScreenState extends State<ExpenseHomeScreen> {
               itemCount: allExpenses.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddExpenseScreen(expense: allExpenses[index], isUpdate: true,),
+                      ),
+                    );
+
+                    loadExpenses();
+                  },
                   title: Text(allExpenses[index].name),
                   subtitle: Text(
                     "Amount: ${allExpenses[index].amount} - date: ${allExpenses[index].date}",
+                  ),
+                  trailing: IconButton(
+                    onPressed: () async {
+                      await HttpHandler.deleteExpense(
+                        allExpenses[index].id ?? '',
+                      );
+                      loadExpenses();
+                    },
+                    icon: Icon(Icons.delete),
                   ),
                 );
               },
@@ -56,7 +77,7 @@ class _ExpenseHomeScreenState extends State<ExpenseHomeScreen> {
               child: Text("Add Expense"),
             ),
           ),
-          SizedBox(height: 32,)
+          SizedBox(height: 32),
         ],
       ),
     );
